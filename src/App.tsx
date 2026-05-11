@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +8,8 @@ import Directory from "./pages/Directory";
 import MemberProfile from "./pages/MemberProfile";
 import JoinDirectory from "./pages/JoinDirectory";
 import AdminDirectory from "./pages/AdminDirectory";
+import AdminLogin from "./pages/AdminLogin";
+import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Work from "./pages/Work";
@@ -27,7 +29,12 @@ const App = () => (
           <Route path="/directory" element={<Directory />} />
           <Route path="/directory/:id" element={<MemberProfile />} />
           <Route path="/join-directory" element={<JoinDirectory />} />
-          <Route path="/admin/directory" element={<AdminDirectory />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<ProtectedAdminRoute />}>
+            <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="/admin/dashboard" element={<AdminDirectory />} />
+            <Route path="/admin/directory" element={<Navigate to="/admin/dashboard" replace />} />
+          </Route>
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/work" element={<Work />} />

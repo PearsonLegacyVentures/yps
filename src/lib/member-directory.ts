@@ -1,3 +1,5 @@
+import { AdminSession, requireAdminSession } from "@/lib/admin-auth";
+
 export type MemberStatus = "pending" | "approved" | "rejected" | "hidden";
 
 export interface MemberProfile {
@@ -215,7 +217,8 @@ export function createPendingMember(input: MemberFormInput): MemberProfile {
   return member;
 }
 
-export function updateMember(id: string, updates: Partial<MemberProfile>) {
+export function updateMember(id: string, updates: Partial<MemberProfile>, adminSession: AdminSession | null) {
+  requireAdminSession(adminSession);
   const now = new Date().toISOString();
   const members = getMembers().map((member) =>
     member.id === id ? { ...member, ...updates, updated_at: now } : member,
@@ -224,7 +227,8 @@ export function updateMember(id: string, updates: Partial<MemberProfile>) {
   return members;
 }
 
-export function deleteMember(id: string) {
+export function deleteMember(id: string, adminSession: AdminSession | null) {
+  requireAdminSession(adminSession);
   const members = getMembers().filter((member) => member.id !== id);
   saveMembers(members);
   return members;
@@ -251,7 +255,8 @@ export function normalizePhoneForWhatsApp(value: string) {
   return value.replace(/[^0-9]/g, "");
 }
 
-export function toCsv(members: MemberProfile[]) {
+export function toCsv(members: MemberProfile[], adminSession: AdminSession | null) {
+  requireAdminSession(adminSession);
   const headers = [
     "full_name",
     "email",
