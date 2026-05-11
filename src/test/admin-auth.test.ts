@@ -7,14 +7,14 @@ describe("admin auth", () => {
   });
 
   it("creates an admin session for the seeded admin credentials", async () => {
-    const session = await signInAdmin("admin@yps.com", "password");
+    const session = await signInAdmin("admin@ypsbahamas.com", "password");
 
     expect(session?.role).toBe("admin");
-    expect(getAdminSession()?.email).toBe("admin@yps.com");
+    expect(getAdminSession()?.email).toBe("admin@ypsbahamas.com");
   });
 
   it("rejects invalid admin credentials", async () => {
-    const session = await signInAdmin("admin@yps.com", "wrong-password");
+    const session = await signInAdmin("admin@ypsbahamas.com", "wrong-password");
 
     expect(session).toBeNull();
     expect(getAdminSession()).toBeNull();

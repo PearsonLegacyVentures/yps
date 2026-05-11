@@ -153,13 +153,13 @@ export default function AdminDirectory() {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(220_34%_20%)_100%)] text-primary-foreground">
+                    <div className="flex h-full w-full items-center justify-center bg-primary text-primary-foreground">
                       <span className="text-sm font-semibold uppercase tracking-[0.35em] text-white/45">
                         Default YPS banner
                       </span>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-primary/20" />
                   <div className="absolute bottom-4 left-4 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
                     {member.banner_image_url
                       ? "Submitted banner image"
@@ -173,7 +173,7 @@ export default function AdminDirectory() {
                         {member.status}
                       </span>
                       {member.is_featured && (
-                        <span className="rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent-foreground">
+                        <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-primary">
                           Featured
                         </span>
                       )}
@@ -188,7 +188,7 @@ export default function AdminDirectory() {
                       {member.bio}
                     </p>
                     {member.open_to_collaboration && (
-                      <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-accent-foreground">
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-primary">
                         Open to collaboration
                       </p>
                     )}
@@ -366,7 +366,7 @@ function EditDialog({
                   className="h-44 w-full object-cover md:h-56"
                 />
               ) : (
-                <div className="flex h-44 items-center justify-center bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(220_34%_20%)_100%)] text-sm font-semibold uppercase tracking-[0.28em] text-white/45 md:h-56">
+                <div className="flex h-44 items-center justify-center bg-primary text-sm font-semibold uppercase tracking-[0.28em] text-white/45 md:h-56">
                   Default YPS banner will show
                 </div>
               )}

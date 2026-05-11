@@ -60,7 +60,7 @@ export default function JoinDirectory() {
           <div>
             <p className="text-eyebrow text-accent">Join the directory</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl">
-              Join the YPS Member Directory.
+              Join the Young Professionals Society directory.
             </h1>
           </div>
           <p className="max-w-2xl text-lg leading-8 text-primary-foreground/75">
@@ -76,7 +76,7 @@ export default function JoinDirectory() {
           {submitted && (
             <Card className="mb-8 rounded-2xl border-accent/30 bg-accent/10 p-5">
               <div className="flex gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 text-accent-foreground" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 text-primary" />
                 <div>
                   <h2 className="font-semibold">
                     Profile submitted for review.
@@ -286,7 +286,7 @@ export default function JoinDirectory() {
                   />
                   <Label htmlFor="consent" className="text-sm leading-6">
                     I confirm this information may be reviewed and published in
-                    the YPS Member Directory.
+                    the Young Professionals Society directory.
                   </Label>
                 </div>
                 <Button

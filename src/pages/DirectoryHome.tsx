@@ -3,11 +3,14 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   Building2,
+  CalendarDays,
   Handshake,
   LineChart,
+  MapPin,
   Network,
   Search,
   Sparkles,
+  Trophy,
   UsersRound,
 } from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
@@ -15,6 +18,7 @@ import { MemberCard } from "@/components/MemberCard";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { approvedMembers } from "@/lib/member-directory";
+import { siteConfig } from "@/lib/site-config";
 
 const benefits = [
   {
@@ -49,6 +53,35 @@ const benefits = [
   },
 ];
 
+
+const communityPillars = [
+  {
+    icon: CalendarDays,
+    title: "Networking events",
+    text: "Rooms designed for useful introductions, business mixers, and Chamber-connected conversations.",
+  },
+  {
+    icon: LineChart,
+    title: "Professional growth",
+    text: "Practical learning moments for members building careers, companies, and public leadership profiles.",
+  },
+  {
+    icon: BriefcaseBusiness,
+    title: "Entrepreneurship",
+    text: "Visibility and support for founders, operators, and independent professionals serving The Bahamas.",
+  },
+  {
+    icon: Handshake,
+    title: "Collaboration",
+    text: "A trusted network for referrals, mentorship, partnerships, and community-minded projects.",
+  },
+  {
+    icon: Trophy,
+    title: "Leadership development",
+    text: "A platform for young professionals preparing to contribute with confidence and discipline.",
+  },
+];
+
 const categories = [
   "Entrepreneurs",
   "Attorneys",
@@ -72,22 +105,18 @@ export default function DirectoryHome() {
   return (
     <PageLayout>
       <section className="relative overflow-hidden bg-primary text-primary-foreground">
-        <div
-          className="absolute inset-0 opacity-20 [background-image:linear-gradient(120deg,transparent_0%,transparent_48%,hsl(var(--accent))_48%,hsl(var(--accent))_49%,transparent_49%,transparent_100%)]"
-          aria-hidden="true"
-        />
         <div className="content-container relative grid gap-12 py-16 md:grid-cols-[1.02fr_0.98fr] md:items-center md:py-24 lg:py-28">
           <div>
             <p className="text-eyebrow text-accent">
-              Young Professionals Society · The Bahamas
+              Young Professionals Society (YPS)
             </p>
             <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.96] tracking-tight text-primary-foreground sm:text-6xl lg:text-7xl">
               Connect With The Next Generation of Bahamian Professionals
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/78 sm:text-xl">
-              The official YPS Member Directory showcasing entrepreneurs,
-              professionals, business leaders, and emerging talent across The
-              Bahamas.
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/80 sm:text-xl">
+              The official Young Professionals Society directory showcases
+              entrepreneurs, professionals, business leaders, and emerging
+              talent across The Bahamas.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button
@@ -128,7 +157,7 @@ export default function DirectoryHome() {
                     Approved member profiles only
                   </p>
                 </div>
-                <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-accent-foreground">
+                <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
                   BCCEC ecosystem
                 </span>
               </div>
@@ -207,9 +236,9 @@ export default function DirectoryHome() {
             {benefits.map((item) => (
               <Card
                 key={item.title}
-                className="rounded-3xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="rounded-3xl border-primary/10 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lg hover:shadow-primary/10"
               >
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/15 text-accent-foreground">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <item.icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold">{item.title}</h3>
@@ -218,6 +247,56 @@ export default function DirectoryHome() {
                 </p>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+
+
+      <section className="section-padding-sm bg-card">
+        <div className="content-container">
+          <div className="grid gap-8 lg:grid-cols-[0.65fr_1fr] lg:items-end">
+            <div>
+              <p className="text-eyebrow">Community & Leadership</p>
+              <h2 className="mt-3 text-headline">
+                Built around the moments where professionals actually connect.
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-muted-foreground">
+                YPS brings together networking, leadership dialogue, and
+                entrepreneurial visibility in a setting that feels credible,
+                useful, and connected to the business community.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {communityPillars.map((item) => (
+                <Card
+                  key={item.title}
+                  className="rounded-[1.5rem] border-primary/10 p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-lg hover:shadow-primary/10"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/20 text-accent-foreground">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                    {item.text}
+                  </p>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-[2rem] border border-primary/10 bg-muted shadow-sm">
+            <div className="grid md:grid-cols-3">
+              {["Bahamian networking events", "Chamber gatherings", "Leadership panels"].map((label) => (
+                <div key={label} className="border-b border-border bg-card p-6 md:border-b-0 md:border-r last:md:border-r-0">
+                  <div className="aspect-[4/3] rounded-[1.5rem] border border-dashed border-primary/25 bg-primary/5" />
+                  <p className="mt-4 text-sm font-semibold text-foreground">{label}</p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                    Replace with approved YPS/BCCEC event photography when available.
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -241,7 +320,7 @@ export default function DirectoryHome() {
                 key={category}
                 className="flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-sm font-semibold shadow-sm"
               >
-                <Building2 className="h-4 w-4 text-accent-foreground" />
+                <Building2 className="h-4 w-4 text-primary" />
                 {category}
               </div>
             ))}
@@ -275,6 +354,46 @@ export default function DirectoryHome() {
           </div>
         </section>
       )}
+
+
+
+      <section className="section-padding-sm bg-background">
+        <div className="content-container">
+          <div className="grid overflow-hidden rounded-[2rem] border border-primary/10 bg-card shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="p-6 md:p-8">
+              <p className="text-eyebrow">YPS contact point</p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+                #2 Shirley Street and Collins Avenue, Nassau, Bahamas
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                {siteConfig.initiative} For directory questions, membership
+                support, or partnership conversations, contact the YPS team.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Button className="rounded-full" asChild>
+                  <Link to="/contact">Contact YPS</Link>
+                </Button>
+                <Button variant="outline" className="rounded-full" asChild>
+                  <a href={siteConfig.contact.mapsUrl} target="_blank" rel="noreferrer">
+                    <MapPin className="h-4 w-4" /> Open Map
+                  </a>
+                </Button>
+              </div>
+            </div>
+            <div className="flex min-h-80 items-center justify-center bg-muted p-6">
+              <div className="w-full max-w-xl rounded-[1.5rem] border border-dashed border-primary/30 bg-card p-8 text-center">
+                <MapPin className="mx-auto h-8 w-8 text-primary" />
+                <p className="mt-4 text-sm font-semibold text-foreground">
+                  Map embed placeholder
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  #2 Shirley Street and Collins Avenue, Nassau, Bahamas
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="section-padding-sm bg-primary text-primary-foreground">
         <div className="content-container grid gap-6 md:grid-cols-[1fr_auto] md:items-center">

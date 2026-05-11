@@ -9,13 +9,18 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-card/90 backdrop-blur-xl">
       <div className="content-container flex h-16 items-center justify-between">
         <Link
           to="/"
-          className="text-lg font-bold tracking-tight text-foreground sm:text-xl"
+          className="inline-flex items-center gap-3 text-foreground"
         >
-          {siteConfig.name}
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-xs font-bold tracking-tight text-primary-foreground shadow-sm shadow-primary/20">
+            YPS
+          </span>
+          <span className="hidden text-base font-bold tracking-tight sm:inline lg:text-lg">
+            {siteConfig.name}
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -24,9 +29,9 @@ export function Navbar() {
             <Link
               key={item.href}
               to={item.href}
-              className={`text-sm font-medium transition-colors hover:text-foreground ${
+              className={`text-sm font-medium transition-colors hover:text-primary ${
                 location.pathname === item.href
-                  ? "text-foreground"
+                  ? "text-primary"
                   : "text-muted-foreground"
               }`}
             >
@@ -54,16 +59,16 @@ export function Navbar() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-background">
+        <div className="md:hidden border-t border-border bg-card">
           <nav className="content-container flex flex-col gap-4 py-6">
             {siteConfig.nav.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`text-base font-medium transition-colors hover:text-foreground ${
+                className={`text-base font-medium transition-colors hover:text-primary ${
                   location.pathname === item.href
-                    ? "text-foreground"
+                    ? "text-primary"
                     : "text-muted-foreground"
                 }`}
               >

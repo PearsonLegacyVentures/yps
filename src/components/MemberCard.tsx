@@ -31,7 +31,7 @@ export function MemberCard({ member }: MemberCardProps) {
           alt={`${member.company_name} profile visual`}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
+        <div className="absolute inset-0 bg-primary/25" />
         {member.is_featured && (
           <Badge className="absolute right-4 top-4 rounded-full bg-accent text-accent-foreground text-[11px]">
             Featured
@@ -72,12 +72,12 @@ export function MemberCard({ member }: MemberCardProps) {
         </p>
 
         <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-          <MapPin className="h-4 w-4 text-accent-foreground" />
+          <MapPin className="h-4 w-4 text-primary" />
           <span>{member.location}</span>
         </div>
 
         {member.open_to_collaboration && (
-          <div className="mt-4 rounded-2xl bg-accent/15 px-4 py-3 text-xs font-semibold text-accent-foreground">
+          <div className="mt-4 rounded-2xl bg-accent/15 px-4 py-3 text-xs font-semibold text-primary">
             Open to collaboration
           </div>
         )}

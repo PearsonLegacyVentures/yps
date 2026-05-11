@@ -70,7 +70,7 @@ export default function MemberProfile() {
                 alt={`${member.full_name} profile banner`}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent" />
+              <div className="absolute inset-0 bg-primary/35" />
               <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-4 md:bottom-7 md:left-7 md:right-7 md:flex-row md:items-end md:justify-between">
                 <div className="flex items-end gap-4">
                   <Avatar className="h-24 w-24 rounded-3xl border-4 border-white bg-muted shadow-xl md:h-32 md:w-32">
@@ -113,7 +113,7 @@ export default function MemberProfile() {
               <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
                 {member.full_name}
               </h1>
-              <p className="mt-4 text-xl text-primary-foreground/78">
+              <p className="mt-4 text-xl text-primary-foreground/80">
                 {member.title} at {member.company_name}
               </p>
               <p className="mt-3 flex items-center gap-2 text-primary-foreground/70">

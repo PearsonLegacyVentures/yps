@@ -3,6 +3,7 @@ import { SectionHeading } from "./SectionHeading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { siteConfig } from "@/lib/site-config";
 
 interface ContactFormProps {
   eyebrow?: string;
@@ -19,15 +20,15 @@ export function ContactForm({ eyebrow, heading, description }: ContactFormProps)
           <div className="space-y-6">
             <div>
               <h4 className="text-sm font-semibold mb-1">Email</h4>
-              <p className="text-sm text-muted-foreground">hello@example.com</p>
+              <p className="text-sm text-muted-foreground">{siteConfig.contact.email}</p>
             </div>
             <div>
               <h4 className="text-sm font-semibold mb-1">Phone</h4>
-              <p className="text-sm text-muted-foreground">+1 (555) 000-0000</p>
+              <p className="text-sm text-muted-foreground">{siteConfig.contact.phone}</p>
             </div>
             <div>
               <h4 className="text-sm font-semibold mb-1">Office</h4>
-              <p className="text-sm text-muted-foreground">123 Main Street, Suite 100<br />New York, NY 10001</p>
+              <p className="text-sm text-muted-foreground">{siteConfig.contact.addressLine1}<br />{siteConfig.contact.city}</p>
             </div>
           </div>
         </div>
@@ -53,9 +54,9 @@ export function ContactForm({ eyebrow, heading, description }: ContactFormProps)
           </div>
           <div>
             <label htmlFor="message" className="text-sm font-medium mb-1.5 block">Message</label>
-            <Textarea id="message" placeholder="Tell us about your project..." rows={5} />
+            <Textarea id="message" placeholder="Tell us how the YPS team can help." rows={5} />
           </div>
-          <Button variant="hero" type="submit" className="w-full sm:w-auto">Send Message</Button>
+          <Button type="submit" className="w-full rounded-full sm:w-auto">Send Message</Button>
         </form>
       </div>
     </Section>

@@ -65,7 +65,7 @@ export default function Directory() {
           <div className="max-w-3xl">
             <p className="text-eyebrow text-accent">Member directory</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
-              Browse the YPS Member Directory.
+              Browse the Young Professionals Society directory.
             </h1>
             <p className="mt-5 text-lg leading-8 text-primary-foreground/75">
               Browse professionals, entrepreneurs, and businesses within the YPS
@@ -78,7 +78,7 @@ export default function Directory() {
       <section className="section-padding-sm">
         <div className="content-container">
           <div className="mb-4 flex items-center gap-2 text-sm font-medium text-muted-foreground">
-            <SlidersHorizontal className="h-4 w-4 text-accent-foreground" />{" "}
+            <SlidersHorizontal className="h-4 w-4 text-primary" />{" "}
             Browse professionals, entrepreneurs, and businesses within the YPS
             network.
           </div>
