@@ -30,7 +30,11 @@ export default function JoinDirectory() {
     setForm((current) => ({ ...current, [field]: value }));
 
   const handleImage = (
-    field: "profile_photo_url" | "logo_url" | "featured_image_url",
+    field:
+      | "profile_photo_url"
+      | "logo_url"
+      | "featured_image_url"
+      | "banner_image_url",
     file?: File,
   ) => {
     if (!file) return;
@@ -261,6 +265,13 @@ export default function JoinDirectory() {
                   onChange={(file) => handleImage("logo_url", file)}
                 />
                 <ImageUpload
+                  label="Profile Banner Image"
+                  helperText="Upload a wide banner image for your profile header. Recommended size: 1600x500px."
+                  preview={form.banner_image_url}
+                  variant="banner"
+                  onChange={(file) => handleImage("banner_image_url", file)}
+                />
+                <ImageUpload
                   label="Featured image optional"
                   preview={form.featured_image_url}
                   onChange={(file) => handleImage("featured_image_url", file)}
@@ -327,17 +338,28 @@ function ImageUpload({
   preview,
   onChange,
   required = false,
+  helperText,
+  variant = "square",
 }: {
   label: string;
   preview: string;
   onChange: (file?: File) => void;
   required?: boolean;
+  helperText?: string;
+  variant?: "square" | "banner";
 }) {
   return (
     <div className="mt-5 space-y-2">
-      <Label>
-        {label} {required && <span className="text-destructive">*</span>}
-      </Label>
+      <div>
+        <Label>
+          {label} {required && <span className="text-destructive">*</span>}
+        </Label>
+        {helperText && (
+          <p className="mt-1 text-xs leading-5 text-muted-foreground">
+            {helperText}
+          </p>
+        )}
+      </div>
       <label className="flex min-h-28 cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/40 p-4 text-center text-sm text-muted-foreground hover:bg-muted">
         <Upload className="mb-2 h-5 w-5" />
         Choose image
@@ -353,7 +375,9 @@ function ImageUpload({
         <img
           src={preview}
           alt={`${label} preview`}
-          className="h-28 w-full rounded-2xl object-cover"
+          className={`${
+            variant === "banner" ? "h-32 md:h-36" : "h-28"
+          } w-full rounded-2xl object-cover`}
         />
       )}
     </div>

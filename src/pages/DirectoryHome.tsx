@@ -113,9 +113,10 @@ export default function DirectoryHome() {
 
           <div className="relative">
             <div className="overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/20 backdrop-blur">
+              {/* Replace this placeholder with approved YPS Bahamas LinkedIn/event photography once image rights and local hosting are confirmed. Do not hotlink LinkedIn assets. */}
               <img
-                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"
-                alt="Professionals networking at a business event"
+                src="/yps-community-visual.svg"
+                alt="YPS Bahamas networking, leadership, and community visual"
                 className="h-[22rem] w-full rounded-[1.5rem] object-cover md:h-[30rem]"
               />
             </div>
@@ -157,22 +158,34 @@ export default function DirectoryHome() {
               A professional network for rising Bahamian leaders.
             </h2>
           </div>
-          <div className="rounded-[2rem] border border-border bg-card p-6 shadow-sm md:p-8">
-            <p className="text-lg leading-8 text-muted-foreground">
-              The Young Professionals Society (YPS) is an initiative connected
-              to the Bahamas Chamber of Commerce and Employers’ Confederation
-              focused on bringing together ambitious young professionals,
-              entrepreneurs, and future business leaders across The Bahamas.
-            </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {["Networking", "Leadership", "Community impact"].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl bg-muted px-4 py-3 text-sm font-semibold text-foreground"
-                >
-                  {item}
+          <div className="overflow-hidden rounded-[2rem] border border-border bg-card shadow-sm">
+            <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
+              <div className="min-h-56 bg-primary">
+                {/* Manual asset slot: upload approved YPS networking, Chamber gathering, or leadership event photography here when available. */}
+                <img
+                  src="/yps-community-visual.svg"
+                  alt="YPS Bahamas community photography placeholder"
+                  className="h-full min-h-56 w-full object-cover"
+                />
+              </div>
+              <div className="p-6 md:p-8">
+                <p className="text-lg leading-8 text-muted-foreground">
+                  The Young Professionals Society (YPS) is an initiative connected
+                  to the Bahamas Chamber of Commerce and Employers’ Confederation
+                  focused on bringing together ambitious young professionals,
+                  entrepreneurs, and future business leaders across The Bahamas.
+                </p>
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {["Networking", "Leadership", "Community impact"].map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl bg-muted px-4 py-3 text-sm font-semibold text-foreground"
+                    >
+                      {item}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

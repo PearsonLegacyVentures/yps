@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500" role="img" aria-labelledby="title desc">
+  <title id="title">YPS Bahamas default profile banner</title>
+  <desc id="desc">A navy and gold professional banner for Young Professionals Society Bahamas profiles.</desc>
+  <defs>
+    <linearGradient id="navy" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#101d39"/>
+      <stop offset="0.55" stop-color="#17284a"/>
+      <stop offset="1" stop-color="#0b1328"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="78%" cy="26%" r="55%">
+      <stop offset="0" stop-color="#d9a72f" stop-opacity="0.5"/>
+      <stop offset="0.45" stop-color="#d9a72f" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#d9a72f" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0v64" fill="none" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1"/>
+      <circle cx="64" cy="64" r="2" fill="#d9a72f" fill-opacity="0.2"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="500" fill="url(#navy)"/>
+  <rect width="1600" height="500" fill="url(#grid)"/>
+  <rect width="1600" height="500" fill="url(#goldGlow)"/>
+  <path d="M-80 420 C260 260 472 550 820 340 S1240 70 1700 190" fill="none" stroke="#d9a72f" stroke-opacity="0.45" stroke-width="3"/>
+  <path d="M-120 460 C260 310 468 590 824 385 S1248 120 1720 240" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+  <g transform="translate(110 120)">
+    <rect x="0" y="0" width="72" height="6" rx="3" fill="#d9a72f"/>
+    <text x="0" y="118" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2">YPS Bahamas</text>
+    <text x="4" y="166" fill="#ffffff" fill-opacity="0.68" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">Young Professionals Society</text>
+  </g>
+  <g transform="translate(1240 98)" opacity="0.78">
+    <circle cx="130" cy="130" r="126" fill="none" stroke="#d9a72f" stroke-opacity="0.42" stroke-width="2"/>
+    <circle cx="130" cy="130" r="82" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    <path d="M42 162h176M70 108h120M98 58h64" stroke="#ffffff" stroke-opacity="0.16" stroke-width="16" stroke-linecap="round"/>
+  </g>
+</svg>

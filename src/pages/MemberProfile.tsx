@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
+  DEFAULT_MEMBER_BANNER_URL,
   getApprovedMember,
   getInitials,
   normalizePhoneForWhatsApp,
@@ -46,10 +47,11 @@ export default function MemberProfile() {
   }
 
   const whatsapp = normalizePhoneForWhatsApp(member.whatsapp || member.phone);
+  const bannerUrl = member.banner_image_url || DEFAULT_MEMBER_BANNER_URL;
 
   return (
     <PageLayout>
-      <section className="bg-primary pb-24 pt-10 text-primary-foreground">
+      <section className="bg-primary pb-20 pt-10 text-primary-foreground md:pb-24">
         <div className="content-container">
           <Button
             variant="ghost"
@@ -60,19 +62,55 @@ export default function MemberProfile() {
               <ArrowLeft className="h-4 w-4" /> Back to Directory
             </Link>
           </Button>
-          <div className="grid gap-8 md:grid-cols-[1fr_0.7fr] md:items-end">
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge className="rounded-full bg-accent text-accent-foreground">
-                  {member.industry}
-                </Badge>
-                {member.open_to_collaboration && (
-                  <Badge className="rounded-full border border-white/20 bg-white/10 text-primary-foreground">
-                    <Handshake className="mr-1 h-3 w-3" /> Open to Collaboration
+
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-2 shadow-2xl shadow-black/20 md:rounded-[2.5rem] md:p-3">
+            <div className="relative h-56 overflow-hidden rounded-[1.5rem] md:h-[22rem] md:rounded-[2rem]">
+              <img
+                src={bannerUrl}
+                alt={`${member.full_name} profile banner`}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-4 md:bottom-7 md:left-7 md:right-7 md:flex-row md:items-end md:justify-between">
+                <div className="flex items-end gap-4">
+                  <Avatar className="h-24 w-24 rounded-3xl border-4 border-white bg-muted shadow-xl md:h-32 md:w-32">
+                    <AvatarImage
+                      src={member.profile_photo_url || member.logo_url}
+                      alt={member.full_name}
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="rounded-3xl bg-primary text-2xl text-primary-foreground md:text-3xl">
+                      {getInitials(member.full_name)}
+                    </AvatarFallback>
+                  </Avatar>
+                  {member.logo_url && (
+                    <div className="hidden rounded-2xl border border-white/30 bg-white/90 p-3 shadow-xl sm:block">
+                      <img
+                        src={member.logo_url}
+                        alt={`${member.company_name} logo`}
+                        className="max-h-14 max-w-32 object-contain"
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-wrap items-center gap-2 md:justify-end">
+                  <Badge className="rounded-full bg-accent text-accent-foreground">
+                    {member.industry}
                   </Badge>
-                )}
+                  {member.open_to_collaboration && (
+                    <Badge className="rounded-full border border-white/20 bg-white/10 text-primary-foreground">
+                      <Handshake className="mr-1 h-3 w-3" /> Open to
+                      Collaboration
+                    </Badge>
+                  )}
+                </div>
               </div>
-              <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-8 md:grid-cols-[1fr_0.7fr] md:items-end">
+            <div>
+              <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
                 {member.full_name}
               </h1>
               <p className="mt-4 text-xl text-primary-foreground/78">
@@ -129,29 +167,10 @@ export default function MemberProfile() {
         </div>
       </section>
 
-      <section className="-mt-14 section-padding-sm pt-0">
+      <section className="section-padding-sm">
         <div className="content-container grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
           <Card className="h-fit rounded-[2rem] p-6 shadow-xl shadow-primary/10">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-24 w-24 rounded-3xl border border-border">
-                <AvatarImage
-                  src={member.profile_photo_url || member.logo_url}
-                  alt={member.full_name}
-                  className="object-cover"
-                />
-                <AvatarFallback className="rounded-3xl bg-primary text-2xl text-primary-foreground">
-                  {getInitials(member.full_name)}
-                </AvatarFallback>
-              </Avatar>
-              {member.logo_url && (
-                <img
-                  src={member.logo_url}
-                  alt={`${member.company_name} logo`}
-                  className="max-h-16 max-w-32 rounded-xl border border-border object-contain p-2"
-                />
-              )}
-            </div>
-            <div className="mt-6 space-y-4 text-sm">
+            <div className="space-y-4 text-sm">
               <Info label="Company" value={member.company_name} />
               <Info
                 label="Business hours"

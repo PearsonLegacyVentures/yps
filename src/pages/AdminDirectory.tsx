@@ -1,6 +1,14 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Download, Edit, EyeOff, LogOut, Star, Trash2 } from "lucide-react";
+import {
+  Download,
+  Edit,
+  EyeOff,
+  LogOut,
+  Star,
+  Trash2,
+  Upload,
+} from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -133,8 +141,32 @@ export default function AdminDirectory() {
 
           <div className="mt-8 space-y-4">
             {visibleMembers.map((member) => (
-              <Card key={member.id} className="rounded-[1.5rem] p-5 shadow-sm">
-                <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-start">
+              <Card
+                key={member.id}
+                className="overflow-hidden rounded-[1.5rem] p-0 shadow-sm"
+              >
+                <div className="relative h-36 bg-muted sm:h-44">
+                  {member.banner_image_url ? (
+                    <img
+                      src={member.banner_image_url}
+                      alt={`${member.full_name} profile banner`}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(220_34%_20%)_100%)] text-primary-foreground">
+                      <span className="text-sm font-semibold uppercase tracking-[0.35em] text-white/45">
+                        Default YPS banner
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 rounded-full bg-background/95 px-3 py-1 text-xs font-semibold text-foreground shadow-sm">
+                    {member.banner_image_url
+                      ? "Submitted banner image"
+                      : "No submitted banner"}
+                  </div>
+                </div>
+                <div className="grid gap-5 p-5 lg:grid-cols-[1fr_auto] lg:items-start">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold capitalize text-muted-foreground">
@@ -217,6 +249,18 @@ export default function AdminDirectory() {
                     >
                       <Edit className="h-4 w-4" /> Edit
                     </Button>
+                    {member.banner_image_url && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="rounded-full"
+                        onClick={() =>
+                          applyUpdate(member.id, { banner_image_url: "" })
+                        }
+                      >
+                        Remove banner
+                      </Button>
+                    )}
                     <Button
                       size="sm"
                       variant="destructive"
@@ -294,6 +338,12 @@ function EditDialog({
   if (!draft) return null;
   const setField = (field: keyof MemberProfile, value: string | boolean) =>
     setDraft((current) => (current ? { ...current, [field]: value } : current));
+  const handleImage = (field: keyof MemberProfile, file?: File) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setField(field, String(reader.result));
+    reader.readAsDataURL(file);
+  };
 
   return (
     <Dialog open={Boolean(member)} onOpenChange={(open) => !open && onClose()}>
@@ -302,6 +352,48 @@ function EditDialog({
           <DialogTitle>Edit member profile</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 md:grid-cols-2">
+          <div className="space-y-3 md:col-span-2">
+            <Label>Profile Banner Image</Label>
+            <p className="text-xs leading-5 text-muted-foreground">
+              Upload or replace the wide profile header image. Recommended size:
+              1600x500px.
+            </p>
+            <div className="overflow-hidden rounded-2xl border border-border bg-muted">
+              {draft.banner_image_url ? (
+                <img
+                  src={draft.banner_image_url}
+                  alt={`${draft.full_name} banner preview`}
+                  className="h-44 w-full object-cover md:h-56"
+                />
+              ) : (
+                <div className="flex h-44 items-center justify-center bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(220_34%_20%)_100%)] text-sm font-semibold uppercase tracking-[0.28em] text-white/45 md:h-56">
+                  Default YPS banner will show
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <label className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground transition hover:bg-primary/90">
+                <Upload className="h-4 w-4" /> Upload / replace banner
+                <input
+                  className="sr-only"
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) =>
+                    handleImage("banner_image_url", event.target.files?.[0])
+                  }
+                />
+              </label>
+              <Button
+                type="button"
+                variant="outline"
+                className="rounded-full"
+                disabled={!draft.banner_image_url}
+                onClick={() => setField("banner_image_url", "")}
+              >
+                Remove banner
+              </Button>
+            </div>
+          </div>
           <EditField
             label="Full name"
             value={draft.full_name}
