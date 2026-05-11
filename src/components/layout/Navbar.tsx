@@ -29,7 +29,7 @@ export function Navbar() {
             </Link>
           ))}
           <Button variant="default" size="sm" asChild>
-            <Link to="/contact">Get in Touch</Link>
+            <Link to="/join-directory">Join the Directory</Link>
           </Button>
         </nav>
 
@@ -60,7 +60,7 @@ export function Navbar() {
               </Link>
             ))}
             <Button variant="default" className="w-full mt-2" asChild>
-              <Link to="/contact" onClick={() => setMobileOpen(false)}>Get in Touch</Link>
+              <Link to="/join-directory" onClick={() => setMobileOpen(false)}>Join the Directory</Link>
             </Button>
           </nav>
         </div>
