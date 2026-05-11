@@ -11,46 +11,89 @@ interface MemberCardProps {
 }
 
 export function MemberCard({ member }: MemberCardProps) {
-  const contactHref = member.email ? `mailto:${member.email}` : member.website || undefined;
+  const contactHref = member.email
+    ? `mailto:${member.email}`
+    : member.website || undefined;
 
   return (
-    <Card className="group overflow-hidden rounded-2xl border-border/80 bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10">
-      <div className="flex gap-4">
-        <Avatar className="h-16 w-16 rounded-2xl border border-border bg-muted">
-          <AvatarImage src={member.profile_photo_url || member.logo_url} alt={member.full_name} className="object-cover" />
-          <AvatarFallback className="rounded-2xl bg-primary text-primary-foreground">{getInitials(member.full_name)}</AvatarFallback>
-        </Avatar>
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="secondary" className="rounded-full text-[11px] font-medium">
-              {member.industry}
-            </Badge>
-            {member.is_featured && <Badge className="rounded-full bg-accent text-accent-foreground text-[11px]">Featured</Badge>}
+    <Card className="group overflow-hidden rounded-[1.75rem] border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10">
+      <div className="relative h-48 overflow-hidden bg-muted">
+        {member.featured_image_url ? (
+          <img
+            src={member.featured_image_url}
+            alt={`${member.company_name} featured`}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(220_34%_20%)_100%)] text-primary-foreground">
+            <span className="text-5xl font-bold tracking-tight text-white/20">
+              YPS
+            </span>
           </div>
-          <h3 className="mt-3 text-xl font-semibold leading-tight text-foreground">{member.full_name}</h3>
-          <p className="mt-1 text-sm font-medium text-muted-foreground">{member.title}</p>
-          <p className="text-sm text-muted-foreground">{member.company_name}</p>
-        </div>
-      </div>
-
-      <p className="mt-5 line-clamp-3 text-sm leading-6 text-muted-foreground">{member.bio}</p>
-
-      <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-        <MapPin className="h-4 w-4 text-accent" />
-        <span>{member.location}</span>
-      </div>
-
-      <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-        <Button className="flex-1 rounded-full" asChild>
-          <Link to={`/directory/${member.id}`}>View Profile</Link>
-        </Button>
-        {contactHref && (
-          <Button variant="outline" className="flex-1 rounded-full" asChild>
-            <a href={contactHref}>
-              <Mail className="h-4 w-4" /> Contact
-            </a>
-          </Button>
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
+        {member.is_featured && (
+          <Badge className="absolute right-4 top-4 rounded-full bg-accent text-accent-foreground text-[11px]">
+            Featured
+          </Badge>
+        )}
+      </div>
+
+      <div className="p-5">
+        <div className="-mt-14 flex items-end gap-4">
+          <Avatar className="h-24 w-24 rounded-3xl border-4 border-card bg-muted shadow-lg">
+            <AvatarImage
+              src={member.profile_photo_url || member.logo_url}
+              alt={member.full_name}
+              className="object-cover"
+            />
+            <AvatarFallback className="rounded-3xl bg-primary text-xl text-primary-foreground">
+              {getInitials(member.full_name)}
+            </AvatarFallback>
+          </Avatar>
+          <Badge
+            variant="secondary"
+            className="mb-2 rounded-full text-[11px] font-medium"
+          >
+            {member.industry}
+          </Badge>
+        </div>
+
+        <h3 className="mt-5 text-xl font-semibold leading-tight text-foreground">
+          {member.full_name}
+        </h3>
+        <p className="mt-1 text-sm font-medium text-muted-foreground">
+          {member.title}
+        </p>
+        <p className="text-sm text-muted-foreground">{member.company_name}</p>
+
+        <p className="mt-5 line-clamp-3 text-sm leading-6 text-muted-foreground">
+          {member.bio}
+        </p>
+
+        <div className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
+          <MapPin className="h-4 w-4 text-accent-foreground" />
+          <span>{member.location}</span>
+        </div>
+
+        {member.open_to_collaboration && (
+          <div className="mt-4 rounded-2xl bg-accent/15 px-4 py-3 text-xs font-semibold text-accent-foreground">
+            Open to collaboration
+          </div>
+        )}
+
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+          <Button className="flex-1 rounded-full" asChild>
+            <Link to={`/directory/${member.id}`}>View Profile</Link>
+          </Button>
+          {contactHref && (
+            <Button variant="outline" className="flex-1 rounded-full" asChild>
+              <a href={contactHref}>
+                <Mail className="h-4 w-4" /> Contact
+              </a>
+            </Button>
+          )}
+        </div>
       </div>
     </Card>
   );
