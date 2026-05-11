@@ -4,28 +4,28 @@
  */
 
 export const siteConfig = {
-  name: "Studio",
-  tagline: "Strategy. Design. Results.",
-  description: "We help ambitious brands create exceptional digital experiences that drive growth and build lasting value.",
+  name: "YPS Directory",
+  tagline: "A curated member directory for the YPS network.",
+  description: "Discover professionals, entrepreneurs, and businesses within the YPS network.",
   url: "https://example.com",
   ogImage: "/og-image.jpg",
   nav: [
+    { label: "Directory", href: "/directory" },
+    { label: "Join", href: "/join-directory" },
     { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Work", href: "/work" },
     { label: "Contact", href: "/contact" },
   ],
   footer: {
     company: [
+      { label: "Directory", href: "/directory" },
+      { label: "Join the Directory", href: "/join-directory" },
       { label: "About", href: "/about" },
-      { label: "Services", href: "/services" },
-      { label: "Work", href: "/work" },
       { label: "Contact", href: "/contact" },
     ],
     resources: [
-      { label: "Blog", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
+      { label: "Browse Members", href: "/directory" },
+      { label: "Submit Profile", href: "/join-directory" },
+      { label: "Contact", href: "/contact" },
     ],
     legal: [
       { label: "Privacy", href: "#" },
