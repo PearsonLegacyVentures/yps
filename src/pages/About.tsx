@@ -94,7 +94,7 @@ export default function About() {
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {focusAreas.map((area) => (
               <Card key={area.title} className="rounded-3xl p-6 shadow-sm">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/15 text-accent-foreground">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <area.icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-lg font-semibold">{area.title}</h3>

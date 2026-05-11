@@ -1,6 +1,6 @@
 import { pbkdf2Sync } from "node:crypto";
 
-const email = process.env.ADMIN_EMAIL ?? "admin@yps.com";
+const email = process.env.ADMIN_EMAIL ?? "admin@ypsbahamas.com";
 const password = process.env.ADMIN_PASSWORD;
 const salt = process.env.ADMIN_PASSWORD_SALT ?? "yps-directory-admin-dev-v1";
 const iterations = Number(process.env.ADMIN_PASSWORD_ITERATIONS ?? 120000);

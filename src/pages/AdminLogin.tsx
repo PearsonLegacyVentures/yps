@@ -45,18 +45,18 @@ export default function AdminLogin() {
 
   return (
     <PageLayout>
-      <section className="min-h-[calc(100vh-7rem)] bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(var(--primary))_48%,hsl(var(--muted))_48%,hsl(var(--muted))_100%)] px-4 py-12 text-primary-foreground md:py-20">
+      <section className="min-h-[calc(100vh-7rem)] bg-primary px-4 py-12 text-primary-foreground md:py-20">
         <div className="mx-auto grid w-full max-w-5xl items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="max-w-xl">
             <p className="text-eyebrow text-accent">YPS administration</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl">Admin Login</h1>
             <p className="mt-4 text-base leading-7 text-primary-foreground/75">
-              Sign in to review submissions, manage profile visibility, and keep the directory accurate for members.
+              Sign in to review submissions, manage profile visibility, and keep the directory accurate for members. For urgent support, contact admin@ypsbahamas.com or +1 242-395-7845.
             </p>
           </div>
 
           <Card className="rounded-[2rem] border-white/60 bg-white p-6 text-foreground shadow-2xl md:p-8">
-            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 text-accent-foreground">
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <LockKeyhole className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
@@ -74,7 +74,7 @@ export default function AdminLogin() {
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="admin@yps.com"
+                  placeholder="admin@ypsbahamas.com"
                   required
                 />
               </div>
