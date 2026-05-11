@@ -21,6 +21,7 @@ export const siteConfig = {
       { label: "Join the Directory", href: "/join-directory" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
+      { label: "Admin Login", href: "/admin/login" },
     ],
     resources: [
       { label: "Browse Members", href: "/directory" },

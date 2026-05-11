@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Download, Edit, EyeOff, Star, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Download, Edit, EyeOff, LogOut, Star, Trash2 } from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,11 +9,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { getAdminSession, signOutAdmin } from "@/lib/admin-auth";
 import { deleteMember, getMembers, INDUSTRIES, MemberProfile, MEMBER_STATUSES, MemberStatus, toCsv, updateMember } from "@/lib/member-directory";
 
 export default function AdminDirectory() {
-  const [adminCode, setAdminCode] = useState("");
-  const [isAdmin, setIsAdmin] = useState(() => window.sessionStorage.getItem("yps-directory-admin") === "true");
+  const navigate = useNavigate();
+  const [adminSession, setAdminSession] = useState(() => getAdminSession());
   const [members, setMembers] = useState<MemberProfile[]>(getMembers());
   const [status, setStatus] = useState<MemberStatus | "all">("pending");
   const [editing, setEditing] = useState<MemberProfile | null>(null);
@@ -20,10 +22,10 @@ export default function AdminDirectory() {
   const visibleMembers = useMemo(() => members.filter((member) => status === "all" || member.status === status), [members, status]);
   const counts = MEMBER_STATUSES.reduce((acc, item) => ({ ...acc, [item]: members.filter((member) => member.status === item).length }), {} as Record<MemberStatus, number>);
 
-  const applyUpdate = (id: string, updates: Partial<MemberProfile>) => setMembers(updateMember(id, updates));
-  const remove = (id: string) => window.confirm("Delete this profile permanently?") && setMembers(deleteMember(id));
+  const applyUpdate = (id: string, updates: Partial<MemberProfile>) => setMembers(updateMember(id, updates, adminSession));
+  const remove = (id: string) => window.confirm("Delete this profile permanently?") && setMembers(deleteMember(id, adminSession));
   const exportCsv = () => {
-    const blob = new Blob([toCsv(members)], { type: "text/csv;charset=utf-8" });
+    const blob = new Blob([toCsv(members, adminSession)], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -32,39 +34,13 @@ export default function AdminDirectory() {
     URL.revokeObjectURL(url);
   };
 
+  const logout = () => {
+    signOutAdmin();
+    setAdminSession(null);
+    navigate("/admin/login", { replace: true });
+  };
 
-  if (!isAdmin) {
-    return (
-      <PageLayout>
-        <section className="section-padding bg-primary text-primary-foreground">
-          <div className="narrow-container">
-            <Card className="rounded-[2rem] p-6 text-foreground shadow-2xl md:p-8">
-              <p className="text-eyebrow">Admin access</p>
-              <h1 className="mt-3 text-3xl font-semibold">Directory management is private.</h1>
-              <p className="mt-3 text-muted-foreground">Enter the admin passcode to review submissions and manage public listings.</p>
-              <form
-                className="mt-6 space-y-4"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  if (adminCode === "yps-admin") {
-                    window.sessionStorage.setItem("yps-directory-admin", "true");
-                    setIsAdmin(true);
-                  }
-                }}
-              >
-                <div className="space-y-2">
-                  <Label htmlFor="admin-code">Admin passcode</Label>
-                  <Input id="admin-code" type="password" value={adminCode} onChange={(event) => setAdminCode(event.target.value)} placeholder="Enter passcode" />
-                </div>
-                <Button className="w-full rounded-full" type="submit">Open Admin Dashboard</Button>
-              </form>
-              <p className="mt-4 text-xs text-muted-foreground">Demo passcode: yps-admin. In production, connect this route to real authentication and database permissions.</p>
-            </Card>
-          </div>
-        </section>
-      </PageLayout>
-    );
-  }
+  if (!adminSession) return null;
 
   return (
     <PageLayout>
@@ -75,7 +51,12 @@ export default function AdminDirectory() {
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl">Member submissions</h1>
             <p className="mt-4 max-w-2xl text-primary-foreground/75">Review pending profiles, approve public listings, and keep the directory clean.</p>
           </div>
-          <Button variant="accent" className="rounded-full" onClick={exportCsv}><Download className="h-4 w-4" /> Export CSV</Button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button variant="accent" className="rounded-full" onClick={exportCsv}><Download className="h-4 w-4" /> Export CSV</Button>
+            <Button variant="outline" className="rounded-full border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary" onClick={logout}>
+              <LogOut className="h-4 w-4" /> Logout
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -119,7 +100,7 @@ export default function AdminDirectory() {
         </div>
       </section>
 
-      <EditDialog member={editing} onClose={() => setEditing(null)} onSave={(updated) => { setMembers(updateMember(updated.id, updated)); setEditing(null); }} />
+      <EditDialog member={editing} onClose={() => setEditing(null)} onSave={(updated) => { setMembers(updateMember(updated.id, updated, adminSession)); setEditing(null); }} />
     </PageLayout>
   );
 }
