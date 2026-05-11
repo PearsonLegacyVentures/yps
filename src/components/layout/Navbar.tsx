@@ -11,7 +11,10 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="content-container flex h-16 items-center justify-between">
-        <Link to="/" className="text-xl font-bold tracking-tight text-foreground">
+        <Link
+          to="/"
+          className="text-lg font-bold tracking-tight text-foreground sm:text-xl"
+        >
           {siteConfig.name}
         </Link>
 
@@ -22,7 +25,9 @@ export function Navbar() {
               key={item.href}
               to={item.href}
               className={`text-sm font-medium transition-colors hover:text-foreground ${
-                location.pathname === item.href ? "text-foreground" : "text-muted-foreground"
+                location.pathname === item.href
+                  ? "text-foreground"
+                  : "text-muted-foreground"
               }`}
             >
               {item.label}
@@ -39,7 +44,11 @@ export function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </button>
       </div>
 
@@ -53,14 +62,18 @@ export function Navbar() {
                 to={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={`text-base font-medium transition-colors hover:text-foreground ${
-                  location.pathname === item.href ? "text-foreground" : "text-muted-foreground"
+                  location.pathname === item.href
+                    ? "text-foreground"
+                    : "text-muted-foreground"
                 }`}
               >
                 {item.label}
               </Link>
             ))}
             <Button variant="default" className="w-full mt-2" asChild>
-              <Link to="/join-directory" onClick={() => setMobileOpen(false)}>Join the Directory</Link>
+              <Link to="/join-directory" onClick={() => setMobileOpen(false)}>
+                Join the Directory
+              </Link>
             </Button>
           </nav>
         </div>
