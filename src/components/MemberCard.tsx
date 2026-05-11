@@ -4,7 +4,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { getInitials, MemberProfile } from "@/lib/member-directory";
+import {
+  DEFAULT_MEMBER_BANNER_URL,
+  getInitials,
+  MemberProfile,
+} from "@/lib/member-directory";
 
 interface MemberCardProps {
   member: MemberProfile;
@@ -14,23 +18,19 @@ export function MemberCard({ member }: MemberCardProps) {
   const contactHref = member.email
     ? `mailto:${member.email}`
     : member.website || undefined;
+  const cardImage =
+    member.featured_image_url ||
+    member.banner_image_url ||
+    DEFAULT_MEMBER_BANNER_URL;
 
   return (
     <Card className="group overflow-hidden rounded-[1.75rem] border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10">
       <div className="relative h-48 overflow-hidden bg-muted">
-        {member.featured_image_url ? (
-          <img
-            src={member.featured_image_url}
-            alt={`${member.company_name} featured`}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,hsl(var(--primary))_0%,hsl(220_34%_20%)_100%)] text-primary-foreground">
-            <span className="text-5xl font-bold tracking-tight text-white/20">
-              YPS
-            </span>
-          </div>
-        )}
+        <img
+          src={cardImage}
+          alt={`${member.company_name} profile visual`}
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent" />
         {member.is_featured && (
           <Badge className="absolute right-4 top-4 rounded-full bg-accent text-accent-foreground text-[11px]">

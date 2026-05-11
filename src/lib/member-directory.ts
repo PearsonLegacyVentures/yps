@@ -21,6 +21,7 @@ export interface MemberProfile {
   profile_photo_url: string;
   logo_url: string;
   featured_image_url: string;
+  banner_image_url: string;
   business_hours: string;
   areas_of_expertise: string;
   professional_interests: string;
@@ -62,6 +63,8 @@ export const INDUSTRIES = [
   "Travel & Tourism",
 ] as const;
 
+export const DEFAULT_MEMBER_BANNER_URL = "/yps-default-banner.svg";
+
 const STORAGE_KEY = "yps-member-directory";
 
 export const blankMemberForm: MemberFormInput = {
@@ -82,6 +85,7 @@ export const blankMemberForm: MemberFormInput = {
   profile_photo_url: "",
   logo_url: "",
   featured_image_url: "",
+  banner_image_url: "",
   business_hours: "",
   areas_of_expertise: "",
   professional_interests: "",
@@ -111,6 +115,8 @@ export const sampleMembers: MemberProfile[] = [
     logo_url: "",
     featured_image_url:
       "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80",
+    banner_image_url:
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80",
     business_hours: "Monday–Friday, 9:00 AM–5:00 PM",
     areas_of_expertise: "Brand strategy, photography, campaign planning",
     professional_interests:
@@ -143,6 +149,8 @@ export const sampleMembers: MemberProfile[] = [
     logo_url: "",
     featured_image_url:
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80",
+    banner_image_url:
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80",
     business_hours: "By appointment",
     areas_of_expertise: "Financial planning, wealth education, SME advisory",
     professional_interests:
@@ -175,6 +183,8 @@ export const sampleMembers: MemberProfile[] = [
     logo_url: "",
     featured_image_url:
       "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1400&q=80",
+    banner_image_url:
+      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1600&q=80",
     business_hours: "Tuesday–Saturday",
     areas_of_expertise: "Workplace wellness, habit design, group facilitation",
     professional_interests:
@@ -206,6 +216,7 @@ export const sampleMembers: MemberProfile[] = [
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
     logo_url: "",
     featured_image_url: "",
+    banner_image_url: "",
     business_hours: "Monday–Friday, by appointment",
     areas_of_expertise: "Business law, contracts, governance",
     professional_interests:
@@ -237,6 +248,7 @@ export const sampleMembers: MemberProfile[] = [
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
     logo_url: "",
     featured_image_url: "",
+    banner_image_url: "",
     business_hours: "Monday–Thursday",
     areas_of_expertise: "Messaging, campaigns, brand positioning",
     professional_interests:
@@ -266,6 +278,7 @@ export const sampleMembers: MemberProfile[] = [
     profile_photo_url: "",
     logo_url: "",
     featured_image_url: "",
+    banner_image_url: "",
     business_hours: "",
     areas_of_expertise: "",
     professional_interests: "",
@@ -294,6 +307,7 @@ export function getMembers(): MemberProfile[] {
     return parsed.map((member) => ({
       areas_of_expertise: "",
       professional_interests: "",
+      banner_image_url: "",
       open_to_collaboration: false,
       ...member,
     }));
@@ -387,6 +401,7 @@ export function toCsv(
     "location",
     "status",
     "is_featured",
+    "banner_image_url",
     "created_at",
     "areas_of_expertise",
     "professional_interests",
