@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
   BriefcaseBusiness,
   Building2,
   CalendarDays,
@@ -109,60 +108,39 @@ export default function DirectoryHome() {
         <img
           src={images.about}
           alt="YPS Bahamas members at a professional community event"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-center brightness-[1.08] saturate-[1.08]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#0B7C8C]/78 to-[#111111]/35" />
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#111111] to-transparent" />
-        <div className="content-container relative grid min-h-[44rem] gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-24 lg:min-h-[48rem]">
-          <div className="max-w-4xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/82 via-[#111111]/45 to-transparent md:from-[#111111]/72 md:via-[#111111]/18 md:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#111111]/70 to-transparent" />
+        <div className="content-container relative grid min-h-[40rem] py-16 sm:min-h-[42rem] md:grid-cols-[0.78fr_1.22fr] md:items-center md:py-24 lg:min-h-[46rem]">
+          <div className="max-w-2xl py-10 md:py-0">
             <p className="text-eyebrow text-accent">
               Official YPS Member Directory
             </p>
-            <h1 className="mt-5 text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Connect With The Next Generation of Bahamian Professionals
+            <h1 className="mt-5 text-4xl font-bold leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Young Professionals. Real Connections. Stronger Bahamas.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/84 sm:text-xl">
-              The official YPS Member Directory showcasing entrepreneurs,
-              professionals, business leaders, and emerging talent across The
-              Bahamas.
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/88 sm:text-xl">
+              Discover entrepreneurs, professionals, business leaders, and
+              emerging talent across The Bahamas.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" variant="accent" className="rounded-full" asChild>
-                <Link to="/join-directory">
-                  Join the Directory <ArrowRight className="h-4 w-4" />
-                </Link>
+              <Button
+                size="lg"
+                variant="accent"
+                className="w-full rounded-full px-7 sm:w-auto"
+                asChild
+              >
+                <Link to="/join-directory">Join the Directory</Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary"
+                className="w-full rounded-full border-white/45 bg-white/5 px-7 text-white backdrop-blur-[2px] hover:border-white hover:bg-white hover:text-primary sm:w-auto"
                 asChild
               >
                 <Link to="/directory">Browse Members</Link>
               </Button>
-            </div>
-          </div>
-
-          <div className="relative hidden md:block">
-            <div className="ml-auto max-w-md rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-                Chamber-connected
-              </p>
-              <p className="mt-3 text-2xl font-semibold leading-tight text-white">
-                A trusted place to be discovered, referred, and connected.
-              </p>
-              <div className="mt-6 grid gap-3">
-                {["Approved public profiles", "Professional sectors", "Bahamas-wide connections"].map(
-                  (item) => (
-                    <div
-                      key={item}
-                      className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white/86"
-                    >
-                      {item}
-                    </div>
-                  ),
-                )}
-              </div>
             </div>
           </div>
         </div>
