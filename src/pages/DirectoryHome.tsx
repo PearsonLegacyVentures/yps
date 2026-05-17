@@ -13,6 +13,7 @@ import {
   Trophy,
   UsersRound,
 } from "lucide-react";
+import { ChamberMap } from "@/components/ChamberMap";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { MemberCard } from "@/components/MemberCard";
 import { Button } from "@/components/ui/button";
@@ -52,7 +53,6 @@ const benefits = [
     text: "Support referrals, mentorship, business visibility, and long-term professional trust.",
   },
 ];
-
 
 const communityPillars = [
   {
@@ -101,30 +101,33 @@ export default function DirectoryHome() {
   const featured = approvedMembers()
     .filter((member) => member.is_featured)
     .slice(0, 6);
+  const { images, contact } = siteConfig;
 
   return (
     <PageLayout>
-      <section className="relative overflow-hidden bg-primary text-primary-foreground">
-        <div className="content-container relative grid gap-12 py-16 md:grid-cols-[1.02fr_0.98fr] md:items-center md:py-24 lg:py-28">
-          <div>
+      <section className="relative overflow-hidden bg-[#111111] text-white">
+        <img
+          src={images.hero}
+          alt="YPS and BCCEC professionals networking in The Bahamas"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#0B7C8C]/78 to-[#111111]/35" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#111111] to-transparent" />
+        <div className="content-container relative grid min-h-[44rem] gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-24 lg:min-h-[48rem]">
+          <div className="max-w-4xl">
             <p className="text-eyebrow text-accent">
-              Young Professionals Society (YPS)
+              Official YPS Member Directory
             </p>
-            <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.96] tracking-tight text-primary-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 text-5xl font-bold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
               Connect With The Next Generation of Bahamian Professionals
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-primary-foreground/80 sm:text-xl">
-              The official Young Professionals Society directory showcases
-              entrepreneurs, professionals, business leaders, and emerging
-              talent across The Bahamas.
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/84 sm:text-xl">
+              The official YPS Member Directory showcasing entrepreneurs,
+              professionals, business leaders, and emerging talent across The
+              Bahamas.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button
-                size="lg"
-                variant="accent"
-                className="rounded-full"
-                asChild
-              >
+              <Button size="lg" variant="accent" className="rounded-full" asChild>
                 <Link to="/join-directory">
                   Join the Directory <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -132,7 +135,7 @@ export default function DirectoryHome() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full border-white/25 bg-white/5 text-white hover:bg-white hover:text-primary"
+                className="rounded-full border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary"
                 asChild
               >
                 <Link to="/directory">Browse Members</Link>
@@ -140,69 +143,61 @@ export default function DirectoryHome() {
             </div>
           </div>
 
-          <div className="relative">
-            <div className="overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl shadow-black/20 backdrop-blur">
-              {/* Replace this placeholder with approved YPS Bahamas LinkedIn/event photography once image rights and local hosting are confirmed. Do not hotlink LinkedIn assets. */}
-              <img
-                src="/yps-community-visual.svg"
-                alt="YPS Bahamas networking, leadership, and community visual"
-                className="h-[22rem] w-full rounded-[1.5rem] object-cover md:h-[30rem]"
-              />
+          <div className="relative hidden md:block">
+            <div className="ml-auto max-w-md rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-2xl shadow-black/30 backdrop-blur">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+                Chamber-connected
+              </p>
+              <p className="mt-3 text-2xl font-semibold leading-tight text-white">
+                A trusted place to be discovered, referred, and connected.
+              </p>
+              <div className="mt-6 grid gap-3">
+                {["Approved public profiles", "Professional sectors", "Bahamas-wide connections"].map(
+                  (item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white/86"
+                    >
+                      {item}
+                    </div>
+                  ),
+                )}
+              </div>
             </div>
-            <Card className="absolute -bottom-6 left-4 right-4 rounded-3xl border-white/40 bg-background/95 p-5 text-foreground shadow-xl backdrop-blur md:left-auto md:right-6 md:w-80">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm font-semibold">Directory preview</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Approved member profiles only
-                  </p>
-                </div>
-                <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
-                  BCCEC ecosystem
-                </span>
-              </div>
-              <div className="mt-4 space-y-3">
-                {featured.slice(0, 2).map((member) => (
-                  <div
-                    key={member.id}
-                    className="rounded-2xl border border-border bg-card p-4"
-                  >
-                    <p className="font-semibold">{member.full_name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {member.title} · {member.industry}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </Card>
           </div>
         </div>
       </section>
 
       <section className="section-padding-sm bg-background">
-        <div className="content-container grid gap-10 lg:grid-cols-[0.7fr_1fr] lg:items-start">
+        <div className="content-container grid gap-10 lg:grid-cols-[0.7fr_1fr] lg:items-center">
           <div>
             <p className="text-eyebrow">What is YPS?</p>
             <h2 className="mt-3 text-headline">
               A professional network for rising Bahamian leaders.
             </h2>
+            <p className="mt-5 text-lg leading-8 text-muted-foreground">
+              The Young Professionals Society is connected to the Bahamas Chamber
+              of Commerce and Employers’ Confederation and brings together
+              ambitious professionals, entrepreneurs, and future business leaders
+              across The Bahamas.
+            </p>
           </div>
           <div className="overflow-hidden rounded-[2rem] border border-border bg-card shadow-sm">
-            <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]">
-              <div className="min-h-56 bg-primary">
-                {/* Manual asset slot: upload approved YPS networking, Chamber gathering, or leadership event photography here when available. */}
+            <div className="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
+              <div className="relative min-h-72 bg-primary">
                 <img
-                  src="/yps-community-visual.svg"
-                  alt="YPS Bahamas community photography placeholder"
-                  className="h-full min-h-56 w-full object-cover"
+                  src={images.about}
+                  alt="YPS Bahamas members at a professional community event"
+                  className="h-full min-h-72 w-full object-cover"
                 />
+                <div className="absolute inset-0 bg-primary/20" />
               </div>
               <div className="p-6 md:p-8">
                 <p className="text-lg leading-8 text-muted-foreground">
-                  The Young Professionals Society (YPS) is an initiative connected
-                  to the Bahamas Chamber of Commerce and Employers’ Confederation
-                  focused on bringing together ambitious young professionals,
-                  entrepreneurs, and future business leaders across The Bahamas.
+                  The directory gives the YPS community a polished public home —
+                  making it easier for members, partners, and Chamber-connected
+                  audiences to identify talent, services, and collaboration
+                  opportunities.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {["Networking", "Leadership", "Community impact"].map((item) => (
@@ -241,7 +236,7 @@ export default function DirectoryHome() {
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <item.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <h3 className="text-xl font-semibold">{item.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">
                   {item.text}
                 </p>
@@ -251,57 +246,61 @@ export default function DirectoryHome() {
         </div>
       </section>
 
-
-
-      <section className="section-padding-sm bg-card">
+      <section className="section-padding-sm bg-background">
         <div className="content-container">
-          <div className="grid gap-8 lg:grid-cols-[0.65fr_1fr] lg:items-end">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="text-eyebrow">Community & Leadership</p>
+              <p className="text-eyebrow">YPS in action</p>
               <h2 className="mt-3 text-headline">
                 Built around the moments where professionals actually connect.
               </h2>
               <p className="mt-4 text-lg leading-8 text-muted-foreground">
-                YPS brings together networking, leadership dialogue, and
-                entrepreneurial visibility in a setting that feels credible,
-                useful, and connected to the business community.
+                The platform supports the practical rhythm of the YPS community:
+                networking rooms, leadership conversations, member visibility,
+                and warm introductions that can continue after an event ends.
               </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {communityPillars.map((item) => (
-                <Card
-                  key={item.title}
-                  className="rounded-[1.5rem] border-primary/10 p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-lg hover:shadow-primary/10"
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/20 text-accent-foreground">
-                    <item.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mt-4 font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    {item.text}
-                  </p>
-                </Card>
-              ))}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <img
+                src={images.networking}
+                alt="YPS networking and business community gathering"
+                className="h-72 w-full rounded-[2rem] object-cover shadow-sm"
+              />
+              <div className="grid gap-4">
+                <img
+                  src={images.community}
+                  alt="YPS members collaborating at a community event"
+                  className="h-36 w-full rounded-[1.5rem] object-cover shadow-sm sm:h-32"
+                />
+                <img
+                  src={images.leadership}
+                  alt="YPS leadership and professional development event"
+                  className="h-36 w-full rounded-[1.5rem] object-cover shadow-sm sm:h-32"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="mt-10 overflow-hidden rounded-[2rem] border border-primary/10 bg-muted shadow-sm">
-            <div className="grid md:grid-cols-3">
-              {["Bahamian networking events", "Chamber gatherings", "Leadership panels"].map((label) => (
-                <div key={label} className="border-b border-border bg-card p-6 md:border-b-0 md:border-r last:md:border-r-0">
-                  <div className="aspect-[4/3] rounded-[1.5rem] border border-dashed border-primary/25 bg-primary/5" />
-                  <p className="mt-4 text-sm font-semibold text-foreground">{label}</p>
-                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                    Replace with approved YPS/BCCEC event photography when available.
-                  </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {communityPillars.map((item) => (
+              <Card
+                key={item.title}
+                className="rounded-[1.5rem] border-primary/10 p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/25 hover:shadow-lg hover:shadow-primary/10"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/20 text-accent-foreground">
+                  <item.icon className="h-5 w-5" />
                 </div>
-              ))}
-            </div>
+                <h3 className="mt-4 font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {item.text}
+                </p>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding-sm bg-background">
+      <section className="section-padding-sm bg-background pt-0">
         <div className="content-container grid gap-10 lg:grid-cols-[0.72fr_1fr] lg:items-start">
           <div>
             <p className="text-eyebrow">Who uses the directory</p>
@@ -338,8 +337,7 @@ export default function DirectoryHome() {
                   Professionals inside the YPS network.
                 </h2>
                 <p className="mt-4 text-muted-foreground">
-                  A sample of approved member profiles representing the
-                  directory experience.
+                  Approved member profiles highlighted by the YPS team.
                 </p>
               </div>
               <Button variant="outline" className="rounded-full" asChild>
@@ -355,41 +353,36 @@ export default function DirectoryHome() {
         </section>
       )}
 
-
-
       <section className="section-padding-sm bg-background">
         <div className="content-container">
-          <div className="grid overflow-hidden rounded-[2rem] border border-primary/10 bg-card shadow-sm lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid overflow-hidden rounded-[2rem] border border-primary/10 bg-card shadow-sm lg:grid-cols-[0.85fr_1.15fr]">
             <div className="p-6 md:p-8">
-              <p className="text-eyebrow">YPS contact point</p>
+              <p className="text-eyebrow">Visit The Chamber</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-                #2 Shirley Street and Collins Avenue, Nassau, Bahamas
+                Bahamas Chamber of Commerce & Employers’ Confederation
               </h2>
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                {siteConfig.initiative} For directory questions, membership
-                support, or partnership conversations, contact the YPS team.
+                The Young Professionals Society operates within the Bahamas
+                Chamber of Commerce and Employers’ Confederation.
               </p>
+              <div className="mt-5 space-y-1 text-sm leading-6 text-muted-foreground">
+                <p className="font-semibold text-foreground">{contact.addressName}</p>
+                <p>{contact.addressLine1}</p>
+                <p>{contact.city}</p>
+              </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button className="rounded-full" asChild>
                   <Link to="/contact">Contact YPS</Link>
                 </Button>
                 <Button variant="outline" className="rounded-full" asChild>
-                  <a href={siteConfig.contact.mapsUrl} target="_blank" rel="noreferrer">
+                  <a href={contact.mapsUrl} target="_blank" rel="noreferrer">
                     <MapPin className="h-4 w-4" /> Open Map
                   </a>
                 </Button>
               </div>
             </div>
-            <div className="flex min-h-80 items-center justify-center bg-muted p-6">
-              <div className="w-full max-w-xl rounded-[1.5rem] border border-dashed border-primary/30 bg-card p-8 text-center">
-                <MapPin className="mx-auto h-8 w-8 text-primary" />
-                <p className="mt-4 text-sm font-semibold text-foreground">
-                  Map embed placeholder
-                </p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  #2 Shirley Street and Collins Avenue, Nassau, Bahamas
-                </p>
-              </div>
+            <div className="bg-muted p-4 md:p-6">
+              <ChamberMap className="h-full" />
             </div>
           </div>
         </div>

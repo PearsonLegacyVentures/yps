@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ChamberMap } from "@/components/ChamberMap";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -34,8 +35,14 @@ export default function Contact() {
 
   return (
     <PageLayout>
-      <section className="bg-primary py-16 text-primary-foreground md:py-24">
-        <div className="content-container grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+      <section className="relative overflow-hidden bg-primary py-16 text-primary-foreground md:py-24">
+        <img
+          src={siteConfig.images.contact}
+          alt="YPS Bahamas professional community event"
+          className="absolute inset-0 h-full w-full object-cover opacity-28"
+        />
+        <div className="absolute inset-0 bg-primary/78" />
+        <div className="content-container relative grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <div>
             <p className="text-eyebrow text-accent">Contact YPS</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
@@ -161,31 +168,27 @@ export default function Contact() {
           <div className="overflow-hidden rounded-[2rem] border border-primary/10 bg-card shadow-sm">
             <div className="grid min-h-[22rem] lg:grid-cols-[0.8fr_1.2fr]">
               <div className="p-6 md:p-8">
-                <p className="text-eyebrow">Map</p>
+                <p className="text-eyebrow">Visit The Chamber</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight">
-                  #2 Shirley Street and Collins Avenue, Nassau, Bahamas
+                  Bahamas Chamber of Commerce & Employers’ Confederation
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                  Use the map area to locate the Bahamas Chamber of Commerce &
-                  Employers’ Confederation office connected to YPS.
+                  The Young Professionals Society operates within the Bahamas
+                  Chamber of Commerce and Employers’ Confederation.
                 </p>
+                <div className="mt-5 space-y-1 text-sm leading-6 text-muted-foreground">
+                  <p className="font-semibold text-foreground">{contact.addressName}</p>
+                  <p>{contact.addressLine1}</p>
+                  <p>{contact.city}</p>
+                </div>
                 <Button variant="outline" className="mt-6 rounded-full" asChild>
                   <a href={contact.mapsUrl} target="_blank" rel="noreferrer">
                     Open in Google Maps
                   </a>
                 </Button>
               </div>
-              <div className="flex min-h-80 items-center justify-center bg-muted p-6">
-                <div className="w-full max-w-xl rounded-[1.5rem] border border-dashed border-primary/30 bg-card p-8 text-center">
-                  <MapPin className="mx-auto h-8 w-8 text-primary" />
-                  <p className="mt-4 text-sm font-semibold text-foreground">
-                    Google Maps embed placeholder
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                    Embed the approved map iframe here when production map keys
-                    and privacy requirements are confirmed.
-                  </p>
-                </div>
+              <div className="bg-muted p-4 md:p-6">
+                <ChamberMap className="h-full" />
               </div>
             </div>
           </div>

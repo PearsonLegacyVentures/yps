@@ -19,7 +19,7 @@ const SESSION_TTL_MS = 1000 * 60 * 60 * 8;
 
 const initialAdminUsers: AdminUser[] = [
   {
-    email: "admin@ypsbahamas.com",
+    email: "admin@yps.com",
     role: "admin",
     salt: "yps-directory-admin-dev-v1",
     iterations: 120000,

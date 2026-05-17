@@ -15,6 +15,14 @@ export const siteConfig = {
   url: "https://ypsbahamas.com/",
   logoUrl: "https://i.ibb.co/MxH7FwzJ/YPS-intro-To-Execs.png",
   ogImage: "https://i.ibb.co/MxH7FwzJ/YPS-intro-To-Execs.png",
+  images: {
+    hero: "https://i.ibb.co/84xM5QQX/1761684838143.jpg",
+    about: "https://i.ibb.co/Pvgn4LGf/1762136233237.jpg",
+    networking: "https://i.ibb.co/yFzHvbm4/1762718269772.jpg",
+    community: "https://i.ibb.co/5WydKf1f/1768116936926.jpg",
+    leadership: "https://i.ibb.co/6cHzbdBp/1764730982378.jpg",
+    contact: "https://i.ibb.co/hxNSsnVw/1764730981632.jpg",
+  },
   contact: {
     organization: "Young Professionals Society",
     email: "admin@ypsbahamas.com",

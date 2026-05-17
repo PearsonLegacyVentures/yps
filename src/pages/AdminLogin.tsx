@@ -74,7 +74,7 @@ export default function AdminLogin() {
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="admin@ypsbahamas.com"
+                  placeholder="admin@yps.com"
                   required
                 />
               </div>

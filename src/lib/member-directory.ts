@@ -66,7 +66,14 @@ export const INDUSTRIES = [
 export const DEFAULT_MEMBER_BANNER_URL = "/yps-default-banner.svg";
 
 const STORAGE_KEY = "yps-member-directory";
-const REMOVED_PLACEHOLDER_MEMBER_IDS = new Set(["maya-thompson", "alina-patel"]);
+const REMOVED_PLACEHOLDER_MEMBER_IDS = new Set([
+  "maya-thompson",
+  "alina-patel",
+  "jordan-reed",
+  "darius-campbell",
+  "natalie-rolle",
+  "pending-demo",
+]);
 
 function withoutRemovedPlaceholders(members: MemberProfile[]) {
   return members.filter((member) => !REMOVED_PLACEHOLDER_MEMBER_IDS.has(member.id));
@@ -97,146 +104,17 @@ export const blankMemberForm: MemberFormInput = {
   open_to_collaboration: false,
 };
 
-export const sampleMembers: MemberProfile[] = [
-  {
-    id: "jordan-reed",
-    full_name: "Jordan Reed",
-    email: "jordan@example.com",
-    phone: "+1 242 555 0188",
-    whatsapp: "",
-    title: "Financial Advisor",
-    company_name: "Reed Wealth Partners",
-    industry: "Accounting & Finance",
-    location: "Nassau, New Providence",
-    bio: "Jordan helps young professionals and business owners make practical financial decisions around savings, investing, retirement planning, and company growth.",
-    services:
-      "Financial planning, investment guidance, retirement planning, small business advisory",
-    website: "https://example.com",
-    instagram: "",
-    linkedin: "https://linkedin.com",
-    facebook: "",
-    profile_photo_url:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    logo_url: "",
-    featured_image_url:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80",
-    banner_image_url:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80",
-    business_hours: "By appointment",
-    areas_of_expertise: "Financial planning, wealth education, SME advisory",
-    professional_interests:
-      "Financial literacy, mentorship, business ownership",
-    open_to_collaboration: true,
-    status: "approved",
-    is_featured: true,
-    created_at: "2026-04-18T10:00:00.000Z",
-    updated_at: "2026-04-18T10:00:00.000Z",
-  },
-  {
-    id: "darius-campbell",
-    full_name: "Darius Campbell",
-    email: "darius@example.com",
-    phone: "+1 242 555 0164",
-    whatsapp: "",
-    title: "Attorney",
-    company_name: "Campbell Legal Advisory",
-    industry: "Legal & Professional Services",
-    location: "Nassau, New Providence",
-    bio: "Darius advises founders and growing companies on practical legal structures, contracts, and compliance matters that support responsible business growth.",
-    services:
-      "Commercial contracts, company formation, governance support, advisory sessions",
-    website: "https://example.com",
-    instagram: "",
-    linkedin: "https://linkedin.com",
-    facebook: "",
-    profile_photo_url:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-    logo_url: "",
-    featured_image_url: "",
-    banner_image_url: "",
-    business_hours: "Monday–Friday, by appointment",
-    areas_of_expertise: "Business law, contracts, governance",
-    professional_interests:
-      "Entrepreneurship, mentorship, policy conversations",
-    open_to_collaboration: false,
-    status: "approved",
-    is_featured: true,
-    created_at: "2026-05-03T10:00:00.000Z",
-    updated_at: "2026-05-03T10:00:00.000Z",
-  },
-  {
-    id: "natalie-rolle",
-    full_name: "Natalie Rolle",
-    email: "natalie@example.com",
-    phone: "+1 242 555 0118",
-    whatsapp: "",
-    title: "Marketing Consultant",
-    company_name: "Rolle Strategy Group",
-    industry: "Marketing & Media",
-    location: "Nassau, New Providence",
-    bio: "Natalie supports service businesses and community organizations with messaging, campaign planning, and public-facing content that is clear and useful.",
-    services:
-      "Marketing strategy, messaging, campaign planning, content direction",
-    website: "https://example.com",
-    instagram: "https://instagram.com",
-    linkedin: "https://linkedin.com",
-    facebook: "",
-    profile_photo_url:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
-    logo_url: "",
-    featured_image_url: "",
-    banner_image_url: "",
-    business_hours: "Monday–Thursday",
-    areas_of_expertise: "Messaging, campaigns, brand positioning",
-    professional_interests:
-      "Community impact, youth leadership, business visibility",
-    open_to_collaboration: true,
-    status: "approved",
-    is_featured: true,
-    created_at: "2026-05-05T10:00:00.000Z",
-    updated_at: "2026-05-05T10:00:00.000Z",
-  },
-  {
-    id: "pending-demo",
-    full_name: "Pending Member",
-    email: "pending@example.com",
-    phone: "+1 242 555 0170",
-    whatsapp: "",
-    title: "Consultant",
-    company_name: "Pending Business",
-    industry: "Marketing & Media",
-    location: "Nassau, New Providence",
-    bio: "This sample submission is pending review and does not appear in the public directory.",
-    services: "Marketing planning, content strategy, local campaigns",
-    website: "",
-    instagram: "",
-    linkedin: "",
-    facebook: "",
-    profile_photo_url: "",
-    logo_url: "",
-    featured_image_url: "",
-    banner_image_url: "",
-    business_hours: "",
-    areas_of_expertise: "",
-    professional_interests: "",
-    open_to_collaboration: false,
-    status: "pending",
-    is_featured: false,
-    created_at: "2026-05-06T10:00:00.000Z",
-    updated_at: "2026-05-06T10:00:00.000Z",
-  },
-];
-
+export const initialMembers: MemberProfile[] = [];
 const canUseStorage = () =>
   typeof window !== "undefined" && Boolean(window.localStorage);
 
 export function getMembers(): MemberProfile[] {
-  if (!canUseStorage()) return sampleMembers;
+  if (!canUseStorage()) return initialMembers;
 
   const stored = window.localStorage.getItem(STORAGE_KEY);
   if (!stored) {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleMembers));
-    return sampleMembers;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(initialMembers));
+    return initialMembers;
   }
 
   try {
@@ -257,8 +135,8 @@ export function getMembers(): MemberProfile[] {
 
     return members;
   } catch {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleMembers));
-    return sampleMembers;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(initialMembers));
+    return initialMembers;
   }
 }
 
