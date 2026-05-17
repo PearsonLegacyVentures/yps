@@ -66,6 +66,11 @@ export const INDUSTRIES = [
 export const DEFAULT_MEMBER_BANNER_URL = "/yps-default-banner.svg";
 
 const STORAGE_KEY = "yps-member-directory";
+const REMOVED_PLACEHOLDER_MEMBER_IDS = new Set(["maya-thompson", "alina-patel"]);
+
+function withoutRemovedPlaceholders(members: MemberProfile[]) {
+  return members.filter((member) => !REMOVED_PLACEHOLDER_MEMBER_IDS.has(member.id));
+}
 
 export const blankMemberForm: MemberFormInput = {
   full_name: "",
@@ -93,40 +98,6 @@ export const blankMemberForm: MemberFormInput = {
 };
 
 export const sampleMembers: MemberProfile[] = [
-  {
-    id: "maya-thompson",
-    full_name: "Maya Thompson",
-    email: "maya@example.com",
-    phone: "+1 242 555 0142",
-    whatsapp: "+12425550142",
-    title: "Creative Director",
-    company_name: "Thompson Creative Studio",
-    industry: "Creative Services",
-    location: "Nassau, New Providence",
-    bio: "Maya develops visual identity systems, campaign imagery, and brand direction for Bahamian founders, hospitality teams, and service businesses preparing for a stronger public presence.",
-    services:
-      "Brand photography, campaign direction, professional headshots, visual identity support",
-    website: "https://example.com",
-    instagram: "https://instagram.com",
-    linkedin: "https://linkedin.com",
-    facebook: "",
-    profile_photo_url:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
-    logo_url: "",
-    featured_image_url:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&q=80",
-    banner_image_url:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80",
-    business_hours: "Monday–Friday, 9:00 AM–5:00 PM",
-    areas_of_expertise: "Brand strategy, photography, campaign planning",
-    professional_interests:
-      "Entrepreneurship, tourism branding, creative business development",
-    open_to_collaboration: true,
-    status: "approved",
-    is_featured: true,
-    created_at: "2026-04-12T10:00:00.000Z",
-    updated_at: "2026-04-12T10:00:00.000Z",
-  },
   {
     id: "jordan-reed",
     full_name: "Jordan Reed",
@@ -160,40 +131,6 @@ export const sampleMembers: MemberProfile[] = [
     is_featured: true,
     created_at: "2026-04-18T10:00:00.000Z",
     updated_at: "2026-04-18T10:00:00.000Z",
-  },
-  {
-    id: "alina-patel",
-    full_name: "Alina Patel",
-    email: "alina@example.com",
-    phone: "+1 242 555 0129",
-    whatsapp: "+12425550129",
-    title: "Founder & Workplace Wellness Consultant",
-    company_name: "Aster Wellness Co.",
-    industry: "Beauty & Wellness",
-    location: "Freeport, Grand Bahama",
-    bio: "Alina designs workplace wellness sessions and private coaching programs for teams and professionals who want healthier routines that fit real schedules.",
-    services:
-      "Wellness coaching, workplace wellness sessions, habit planning, private consultations",
-    website: "https://example.com",
-    instagram: "https://instagram.com",
-    linkedin: "",
-    facebook: "https://facebook.com",
-    profile_photo_url:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&q=80",
-    logo_url: "",
-    featured_image_url:
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1400&q=80",
-    banner_image_url:
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1600&q=80",
-    business_hours: "Tuesday–Saturday",
-    areas_of_expertise: "Workplace wellness, habit design, group facilitation",
-    professional_interests:
-      "Leadership wellbeing, women in business, community health",
-    open_to_collaboration: true,
-    status: "approved",
-    is_featured: true,
-    created_at: "2026-05-01T10:00:00.000Z",
-    updated_at: "2026-05-01T10:00:00.000Z",
   },
   {
     id: "darius-campbell",
@@ -304,13 +241,21 @@ export function getMembers(): MemberProfile[] {
 
   try {
     const parsed = JSON.parse(stored) as MemberProfile[];
-    return parsed.map((member) => ({
-      areas_of_expertise: "",
-      professional_interests: "",
-      banner_image_url: "",
-      open_to_collaboration: false,
-      ...member,
-    }));
+    const members = withoutRemovedPlaceholders(
+      parsed.map((member) => ({
+        areas_of_expertise: "",
+        professional_interests: "",
+        banner_image_url: "",
+        open_to_collaboration: false,
+        ...member,
+      })),
+    );
+
+    if (members.length !== parsed.length) {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+    }
+
+    return members;
   } catch {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleMembers));
     return sampleMembers;

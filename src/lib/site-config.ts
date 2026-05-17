@@ -13,7 +13,8 @@ export const siteConfig = {
   initiative:
     "An initiative connected to the Bahamas Chamber of Commerce and Employers’ Confederation.",
   url: "https://ypsbahamas.com/",
-  ogImage: "/og-image.jpg",
+  logoUrl: "https://i.ibb.co/MxH7FwzJ/YPS-intro-To-Execs.png",
+  ogImage: "https://i.ibb.co/MxH7FwzJ/YPS-intro-To-Execs.png",
   contact: {
     organization: "Young Professionals Society",
     email: "admin@ypsbahamas.com",
