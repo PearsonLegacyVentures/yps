@@ -9,18 +9,18 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-card/90 backdrop-blur-xl">
-      <div className="content-container flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-card/95 backdrop-blur-xl">
+      <div className="content-container flex min-h-24 items-center justify-between gap-5 py-3 md:min-h-28">
         <Link
           to="/"
-          className="inline-flex items-center gap-3 text-foreground"
+          className="inline-flex shrink-0 items-center text-foreground"
+          aria-label={`${siteConfig.name} home`}
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-xs font-bold tracking-tight text-primary-foreground shadow-sm shadow-primary/20">
-            YPS
-          </span>
-          <span className="hidden text-base font-bold tracking-tight sm:inline lg:text-lg">
-            {siteConfig.name}
-          </span>
+          <img
+            src={siteConfig.logoUrl}
+            alt={`${siteConfig.name} logo`}
+            className="h-16 w-[12.5rem] object-contain object-left sm:h-[4.5rem] sm:w-[17rem] lg:h-20 lg:w-[21rem]"
+          />
         </Link>
 
         {/* Desktop nav */}
@@ -45,7 +45,7 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-foreground"
+          className="rounded-full border border-border p-2 text-foreground shadow-sm md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >

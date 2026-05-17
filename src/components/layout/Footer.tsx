@@ -10,13 +10,16 @@ export function Footer() {
       <div className="content-container py-12 md:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_1fr] lg:gap-14">
           <div>
-            <Link to="/" className="inline-flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-sm font-bold tracking-tight text-primary-foreground shadow-sm shadow-primary/20">
-                YPS
-              </span>
-              <span className="text-lg font-bold tracking-tight text-foreground">
-                {siteConfig.name}
-              </span>
+            <Link
+              to="/"
+              className="inline-flex items-center"
+              aria-label={`${siteConfig.name} home`}
+            >
+              <img
+                src={siteConfig.logoUrl}
+                alt={`${siteConfig.name} logo`}
+                className="h-16 w-[13rem] object-contain object-left sm:h-20 sm:w-[18rem]"
+              />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">
               {siteConfig.tagline} {siteConfig.initiative}
