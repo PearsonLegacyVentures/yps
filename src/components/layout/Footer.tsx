@@ -18,7 +18,7 @@ export function Footer() {
               <img
                 src={siteConfig.logoUrl}
                 alt={`${siteConfig.name} logo`}
-                className="h-16 w-[13rem] object-contain object-left sm:h-20 sm:w-[18rem]"
+                className="h-32 w-full max-w-[26rem] object-contain object-left sm:h-40 sm:max-w-[36rem]"
               />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground">

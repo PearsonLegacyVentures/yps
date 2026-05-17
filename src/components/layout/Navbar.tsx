@@ -10,7 +10,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-card/95 backdrop-blur-xl">
-      <div className="content-container flex min-h-24 items-center justify-between gap-5 py-3 md:min-h-28">
+      <div className="content-container flex min-h-40 items-center justify-between gap-5 py-3 sm:min-h-44 xl:min-h-48">
         <Link
           to="/"
           className="inline-flex shrink-0 items-center text-foreground"
@@ -19,12 +19,12 @@ export function Navbar() {
           <img
             src={siteConfig.logoUrl}
             alt={`${siteConfig.name} logo`}
-            className="h-16 w-[12.5rem] object-contain object-left sm:h-[4.5rem] sm:w-[17rem] lg:h-20 lg:w-[21rem]"
+            className="h-32 w-[min(25rem,calc(100vw-6.5rem))] object-contain object-left sm:h-[9rem] sm:w-[34rem] xl:h-40 xl:w-[42rem]"
           />
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden xl:flex items-center gap-8">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
@@ -45,7 +45,7 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="rounded-full border border-border p-2 text-foreground shadow-sm md:hidden"
+          className="rounded-full border border-border p-2 text-foreground shadow-sm xl:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -59,7 +59,7 @@ export function Navbar() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-card">
+        <div className="xl:hidden border-t border-border bg-card">
           <nav className="content-container flex flex-col gap-4 py-6">
             {siteConfig.nav.map((item) => (
               <Link
