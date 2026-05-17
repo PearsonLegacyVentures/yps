@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import { CheckCircle2, Upload } from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { siteConfig } from "@/lib/site-config";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -22,6 +23,7 @@ import {
 } from "@/lib/member-directory";
 
 export default function JoinDirectory() {
+  const { contact } = siteConfig;
   const [form, setForm] = useState<MemberFormInput>(blankMemberForm);
   const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -55,8 +57,14 @@ export default function JoinDirectory() {
 
   return (
     <PageLayout>
-      <section className="bg-primary py-16 text-primary-foreground md:py-24">
-        <div className="content-container grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+      <section className="relative overflow-hidden bg-primary py-16 text-primary-foreground md:py-24">
+        <img
+          src={siteConfig.images.leadership}
+          alt="YPS leadership and networking event"
+          className="absolute inset-0 h-full w-full object-cover opacity-24"
+        />
+        <div className="absolute inset-0 bg-primary/82" />
+        <div className="content-container relative grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <div>
             <p className="text-eyebrow text-accent">Join the directory</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl">
@@ -251,7 +259,7 @@ export default function JoinDirectory() {
                 <h2 className="text-lg font-semibold">Images</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Upload preview images are saved with your pending submission
-                  in this demo.
+                  for admin review.
                 </p>
                 <ImageUpload
                   label="Profile photo"
@@ -296,6 +304,30 @@ export default function JoinDirectory() {
                 >
                   Submit for Review
                 </Button>
+              </Card>
+
+              <Card className="rounded-[2rem] border-primary/10 bg-muted/60 p-5">
+                <h2 className="text-lg font-semibold">Need help joining?</h2>
+                <div className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+                  <p>
+                    <span className="block font-semibold text-foreground">
+                      {contact.addressName}
+                    </span>
+                    {contact.addressLine1}<br />
+                    {contact.city}
+                  </p>
+                  <a href={`mailto:${contact.email}`} className="block hover:text-primary">
+                    {contact.email}
+                  </a>
+                  <a
+                    href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block hover:text-primary"
+                  >
+                    WhatsApp {contact.phone}
+                  </a>
+                </div>
               </Card>
             </div>
           </form>

@@ -3,6 +3,7 @@ import { BookOpen, Handshake, Megaphone, Target, Users } from "lucide-react";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { siteConfig } from "@/lib/site-config";
 
 const focusAreas = [
   {
@@ -34,8 +35,14 @@ const focusAreas = [
 export default function About() {
   return (
     <PageLayout>
-      <section className="bg-primary py-16 text-primary-foreground md:py-24">
-        <div className="content-container max-w-4xl">
+      <section className="relative overflow-hidden bg-primary py-16 text-primary-foreground md:py-24">
+        <img
+          src={siteConfig.images.community}
+          alt="YPS Bahamas community and professional networking event"
+          className="absolute inset-0 h-full w-full object-cover opacity-24"
+        />
+        <div className="absolute inset-0 bg-primary/82" />
+        <div className="content-container relative max-w-4xl">
           <p className="text-eyebrow text-accent">About YPS</p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
             A connected community for young professionals in The Bahamas.

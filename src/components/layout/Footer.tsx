@@ -34,7 +34,7 @@ export function Footer() {
               <Link
                 key={item.href}
                 to={item.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                className={`text-sm text-muted-foreground transition-colors hover:text-primary ${item.href === "/admin/login" ? "opacity-70" : ""}`}
               >
                 {item.label}
               </Link>
@@ -43,14 +43,14 @@ export function Footer() {
 
           <div className="rounded-[1.75rem] border border-primary/10 bg-muted/70 p-5">
             <h4 className="text-sm font-semibold text-foreground">
-              Footer contact
+              Contact
             </h4>
             <div className="mt-4 space-y-4 text-sm leading-6 text-muted-foreground">
               <div className="flex gap-3">
                 <MapPin className="mt-1 h-4 w-4 shrink-0 text-primary" />
                 <p>
                   <span className="block font-semibold text-foreground">
-                    {contact.organization}
+                    {contact.addressName}
                   </span>
                   <span className="block">{contact.addressLine1}</span>
                   <span className="block">{contact.city}</span>
