@@ -110,17 +110,39 @@ export default function DirectoryHome() {
           alt="YPS Bahamas members at a professional community event"
           className="absolute inset-0 h-full w-full object-cover object-center brightness-[1.08] saturate-[1.08]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/82 via-[#111111]/45 to-transparent md:from-[#111111]/72 md:via-[#111111]/18 md:to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#111111]/70 to-transparent" />
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.62) 38%, rgba(0,0,0,0.28) 72%, rgba(0,0,0,0.04) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-y-0 left-0 hidden w-[82%] md:block lg:w-[74%]"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.48) 34%, rgba(0,0,0,0.16) 66%, rgba(0,0,0,0) 100%)",
+          }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#111111]/35 to-transparent" />
         <div className="content-container relative grid min-h-[40rem] py-16 sm:min-h-[42rem] md:grid-cols-[0.78fr_1.22fr] md:items-center md:py-24 lg:min-h-[46rem]">
           <div className="max-w-2xl py-10 md:py-0">
-            <p className="text-eyebrow text-accent">
+            <p
+              className="text-eyebrow text-accent"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}
+            >
               Official YPS Member Directory
             </p>
-            <h1 className="mt-5 text-4xl font-bold leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1
+              className="mt-5 text-4xl font-bold leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}
+            >
               Young Professionals. Real Connections. Stronger Bahamas.
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/88 sm:text-xl">
+            <p
+              className="mt-6 max-w-xl text-lg leading-8 text-white/90 sm:text-xl"
+              style={{ textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}
+            >
               Discover entrepreneurs, professionals, business leaders, and
               emerging talent across The Bahamas.
             </p>
