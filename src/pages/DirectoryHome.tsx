@@ -107,8 +107,8 @@ export default function DirectoryHome() {
     <PageLayout>
       <section className="relative overflow-hidden bg-[#111111] text-white">
         <img
-          src={images.hero}
-          alt="YPS and BCCEC professionals networking in The Bahamas"
+          src={images.about}
+          alt="YPS Bahamas members at a professional community event"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#0B7C8C]/78 to-[#111111]/35" />
@@ -186,8 +186,8 @@ export default function DirectoryHome() {
             <div className="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
               <div className="relative min-h-72 bg-primary">
                 <img
-                  src={images.about}
-                  alt="YPS Bahamas members at a professional community event"
+                  src={images.hero}
+                  alt="YPS and BCCEC professionals networking in The Bahamas"
                   className="h-full min-h-72 w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-primary/20" />
